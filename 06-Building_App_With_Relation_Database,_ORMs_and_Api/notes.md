@@ -19,6 +19,7 @@ Critical for backend engineers → Must know how to model and interact with data
 SQL Databases (Relational)
 Structured data with relationships.
 Data integrity is enforced at the database level.
+
 Example schema:
 Users(id, name, email, password, profile_image)
 Friends(user1_id, user2_id)
@@ -30,6 +31,7 @@ Example DBs: Postgres, MySQL, Oracle, SQL Server
 ✅ Pros: Strong structure, automatic validation, avoids invalid data.
 NoSQL Databases (Non-Relational)
 Flexible, schema-less (can store any key-value pairs).
+
 Example:
 {
 "id": 1,
@@ -127,3 +129,89 @@ Summary
   databases.
 - It allows developers to use objects instead of writing raw queries.
 - Each programming language has specific ORMs for different databases.
+
+////////////////////////////////////////////////////////////////////////////////
+
+📒 Notes – Setting up PostgreSQL
+
+✅ Why PostgreSQL?
+One of the most powerful SQL databases.
+Used widely in startups & companies.
+Chosen as the database for this setup.
+
+⚙️ Three Ways to Install PostgreSQL
+1. Full Local Installation
+Download from the official PostgreSQL website
+Available for Linux, macOS, Windows, BSD, Solaris.
+Example: version 17.4 (latest at recording time).
+You directly install PostgreSQL on your system.
+
+2. Cloud-Hosted PostgreSQL
+Run PostgreSQL on a remote server (e.g., AWS, Supabase).
+Your local app connects to the cloud DB.
+
+Pros:
+No need to install locally.
+Easy to spin up with one click.
+
+Cons:
+Latency (slower response due to remote calls).
+Cost (cloud hosting fees).
+Example: Supabase
+Provides URL, username, password for connection.
+
+3. Dockerized PostgreSQL (Recommended Hybrid)
+Run PostgreSQL inside a Docker container.
+Not installed directly on your machine.
+
+Benefits:
+Clean environment (no pollution of local system).
+Can spin up and destroy containers easily.
+Multiple databases (Postgres, MongoDB, Redis, etc.) can run in the same setup.
+
+🐳 Using Docker for PostgreSQL
+Install Docker Desktop
+Download for your platform.
+Run docker version in terminal to check installation.
+
+Create docker-compose.yml file
+
+services:
+  postgres:
+    image: postgres:17.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydb
+
+
+ Run PostgreSQL in Docker
+
+- Start container:
+docker compose up
+
+- Run in background:
+docker compose up -d
+
+- Stop container:
+docker compose down
+
+Container behavior
+up → pulls image & runs container.
+up -d → runs in background.
+down → stops & removes container.
+
+🔑 Key Points
+PostgreSQL default port: 5432.
+Environment variables define:
+POSTGRES_USER → Username
+POSTGRES_PASSWORD → Password
+POSTGRES_DB → Database name
+With Docker, setup is portable, fast, and clean.
+
+👉 So in short:
+Local Install → Heavy, direct.
+Cloud DB → Easy, but latency & cost.
+Dockerized DB → Best of both worlds ✅.

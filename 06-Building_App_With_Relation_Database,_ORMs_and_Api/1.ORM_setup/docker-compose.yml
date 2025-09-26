@@ -1,0 +1,14 @@
+services: # Define all the services (containers) you want to run
+  postgres: # Service name (you can call it anything, e.g., "db" or "postgres")
+    image: postgres:17.4 # Use the official PostgreSQL Docker image, version 17.4
+    ports:
+      - "5432:5432" # Map container's port 5432 → host machine's port 5432
+        # This lets apps on your host (e.g., Node.js, pgAdmin, DBeaver) connect
+        # to PostgreSQL inside the container using localhost:5432
+    environment: # Environment variables configure PostgreSQL on startup
+      POSTGRES_DB: mydb # Creates a database named "mydb" when container starts
+      POSTGRES_USER: admin # Creates a user named "admin"
+      POSTGRES_PASSWORD: admin
+      # Sets "admin" as the password for that user
+      # You will use these credentials in your app connection string:
+      # postgres://admin:admin@localhost:5432/mydb

@@ -68,7 +68,7 @@ exports.createBook = async (req, res) => {
         const [result] = await db.insert(bookTable).values({
             title,
             description,
-            author_id: authorId // Must match the column name in the database
+            authorId // ✅ Matches your table definition
         }).returning({
             id: bookTable.id
         })
@@ -87,7 +87,7 @@ exports.deleteBook = async (req, res) => {
 
     try {
         // Delete the book where the ID matches
-        await db.delete(bookTable).where((table) => eq(table.id, id))
+        await db.delete(bookTable).where(eq(bookTable.id, id))
 
         // Return a success message
         res.status(200).json({ message: "Book deleted successfully" })
